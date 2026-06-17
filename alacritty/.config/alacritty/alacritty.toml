@@ -29,10 +29,12 @@ white = "#c0caf5"
 family = "IosevkaNerdFontMono"
 style = "Bold"
 
+[terminal]
+
 [font]
 size = 13.0
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 args = ["-l", "-c", "tmux attach || tmux new-session"]
 
