@@ -109,6 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias todo='nvim ~/Dropbox/obsidian_vault/nimtech/thon/microservices/to_do.md'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -126,4 +127,8 @@ function y() {
 
 # Alias
 alias teams='teams-for-linux'
+# GlobalProtect, replacing the Azure VPN client. sudo is needed to create the tun
+# device, and -E so the SAML window inherits the Wayland session env -- drop either
+# and it fails, in different and unobvious ways. Reaches live and canary both.
 alias thon-vpn='sudo -E gpclient connect vpngw-hub02.thon.com'
+alias thon-vpn-down='sudo gpclient disconnect'
