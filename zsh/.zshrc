@@ -126,3 +126,4 @@ function y() {
 
 # Alias
 alias teams='teams-for-linux'
+alias thon-vpn='sudo -E gpclient connect vpngw-hub02.thon.com'
