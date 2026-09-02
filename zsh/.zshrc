@@ -127,8 +127,5 @@ function y() {
 
 # Alias
 alias teams='teams-for-linux'
-# GlobalProtect, replacing the Azure VPN client. sudo is needed to create the tun
-# device, and -E so the SAML window inherits the Wayland session env -- drop either
-# and it fails, in different and unobvious ways. Reaches live and canary both.
-alias thon-vpn='sudo -E gpclient connect vpngw-hub02.thon.com'
-alias thon-vpn-down='sudo gpclient disconnect'
+alias thon-vpn='sudo -E gpclient connect --browser firefox vpngw-hub02.thon.com'
+alias mscd='cd /home/kjetilcf/Dropbox/Nimtech/thon/microservices'
