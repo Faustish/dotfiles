@@ -133,4 +133,8 @@ alias teams='teams-for-linux'
 # --browser firefox sends SAML to a real browser instead of the embedded WebKit window.
 alias thon-vpn='sudo -E gpclient connect --browser firefox vpngw-hub02.thon.com'
 alias thon-vpn-down='sudo gpclient disconnect'
+# Nimtech WireGuard. Config in /etc/wireguard/wg0.conf (one per machine, from the
+# Nimtech portal). AllowedIPs is 0.0.0.0/0, so ALL traffic goes through it.
+alias nimtech-up='sudo wg-quick up wg0'
+alias nimtech-down='sudo wg-quick down wg0'
 alias mscd='cd /home/kjetilcf/Dropbox/Nimtech/thon/microservices'
