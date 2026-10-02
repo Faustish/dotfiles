@@ -140,3 +140,28 @@ alias nimtech-down='sudo wg-quick down wg0'
 alias mscd='cd /home/kjetilcf/Dropbox/Nimtech/thon/microservices'
 alias px8cn='bluetoothctl connect EC:66:D1:C7:04:29'
 alias px8dc='bluetoothctl disconnect EC:66:D1:C7:04:29'
+
+# PIM activation
+# Activates "Azure Kubernetes Service RBAC Cluster Admin". The eligibility sits on
+# the "Azure Kubernetes Services" scope, so one activation covers every cluster
+# under it (aks-liv-prep-k8s AND aks-liv-prd-k8s). "canary" picks the
+# "Azure Kubernetes Services - Canary" scope instead.
+# Usage: pim-aks [live|canary] [hours] [reason]
+pim-aks() {
+  local env=${1:-live} hours=${2:-8} reason=${3:-"Platform work"}
+  local role="Azure Kubernetes Service RBAC Cluster Admin" scopename="Azure Kubernetes Services"
+  [[ "$env" == "canary" ]] && scopename="Azure Kubernetes Services - Canary"
+  local me=$(az ad signed-in-user show --query id -o tsv)
+  local row=$(az rest --method get \
+    --url 'https://management.azure.com/providers/Microsoft.Authorization/roleEligibilityScheduleInstances?api-version=2020-10-01&$filter=asTarget()' \
+    --query "value[?properties.expandedProperties.roleDefinition.displayName=='${role}' && properties.expandedProperties.scope.displayName=='${scopename}'] | [0].[properties.scope, properties.roleDefinitionId, properties.roleEligibilityScheduleId]" -o tsv)
+  [[ -z "$row" ]] && { echo "No eligible '${role}' on '${scopename}'"; return 1; }
+  # az -o tsv prints a list as one value per line, so split on newlines.
+  local parts=("${(@f)row}")
+  local scope=$parts[1] roledef=$parts[2] elig=$parts[3]
+  local body="{\"properties\":{\"principalId\":\"${me}\",\"roleDefinitionId\":\"${roledef}\",\"requestType\":\"SelfActivate\",\"linkedRoleEligibilityScheduleId\":\"${elig}\",\"justification\":\"${reason}\",\"scheduleInfo\":{\"startDateTime\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"expiration\":{\"type\":\"AfterDuration\",\"duration\":\"PT${hours}H\"}}}}"
+  echo "Activating '${role}' on '${scopename}' for ${hours}h..."
+  az rest --method put \
+    --url "https://management.azure.com${scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/$(uuidgen)?api-version=2020-10-01" \
+    --body "$body" --query "properties.status" -o tsv
+}
