@@ -165,3 +165,7 @@ pim-aks() {
     --url "https://management.azure.com${scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/$(uuidgen)?api-version=2020-10-01" \
     --body "$body" --query "properties.status" -o tsv
 }
+alias lib5cn='bluetoothctl connect 00:7F:1D:CC:2D:CE'
+alias lib5dc='bluetoothctl disconnect 00:7F:1D:CC:2D:CE'
+alias wonderboomcn='bluetoothctl connect 68:59:32:F3:51:B7'
+alias wonderboomdc='bluetoothctl disconnect 68:59:32:F3:51:B7'

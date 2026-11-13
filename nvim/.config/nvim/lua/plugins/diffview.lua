@@ -6,7 +6,10 @@ local function diff_against_base()
     if not base or base == "" then
       return
     end
-    vim.cmd("DiffviewOpen " .. base .. "...HEAD")
+    -- --imply-local points the HEAD end of the range at the real files on disk,
+    -- so the right-hand pane is editable and LSP attaches. Without it both sides
+    -- are read-only buffers git builds from commits.
+    vim.cmd("DiffviewOpen " .. base .. "...HEAD --imply-local")
   end)
 end
 
