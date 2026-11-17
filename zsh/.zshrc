@@ -138,9 +138,8 @@ alias thon-vpn-down='sudo gpclient disconnect'
 alias nimtech-up='sudo wg-quick up wg0'
 alias nimtech-down='sudo wg-quick down wg0'
 alias mscd='cd /home/kjetilcf/Dropbox/Nimtech/thon/microservices'
-alias px8cn='bluetoothctl connect EC:66:D1:C7:04:29'
-alias px8dc='bluetoothctl disconnect EC:66:D1:C7:04:29'
-
+alias l5c='bluetoothctl connect 00:7F:1D:CC:2D:CE'
+alias l5d='bluetoothctl disconnect 00:7F:1D:CC:2D:CE'
 # PIM activation
 # Activates "Azure Kubernetes Service RBAC Cluster Admin". The eligibility sits on
 # the "Azure Kubernetes Services" scope, so one activation covers every cluster
@@ -165,7 +164,6 @@ pim-aks() {
     --url "https://management.azure.com${scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/$(uuidgen)?api-version=2020-10-01" \
     --body "$body" --query "properties.status" -o tsv
 }
-alias lib5cn='bluetoothctl connect 00:7F:1D:CC:2D:CE'
-alias lib5dc='bluetoothctl disconnect 00:7F:1D:CC:2D:CE'
+
 alias wonderboomcn='bluetoothctl connect 68:59:32:F3:51:B7'
 alias wonderboomdc='bluetoothctl disconnect 68:59:32:F3:51:B7'
