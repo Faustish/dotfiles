@@ -135,8 +135,8 @@ alias l5c='bluetoothctl connect 00:7F:1D:CC:2D:CE'
 alias l5d='bluetoothctl disconnect 00:7F:1D:CC:2D:CE'
 alias wonderboomcn='bluetoothctl connect 68:59:32:F3:51:B7'
 alias wonderboomdc='bluetoothctl disconnect 68:59:32:F3:51:B7'
-alias hfp='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE headset-head-unit'
-alias a2dp='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE a2dp-sink'
+alias mic='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE headset-head-unit'
+alias nomic='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE a2dp-sink'
 # PIM activation
 # Activates "Azure Kubernetes Service RBAC Cluster Admin". The eligibility sits on
 # the "Azure Kubernetes Services" scope, so one activation covers every cluster
