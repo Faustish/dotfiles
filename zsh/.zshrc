@@ -126,20 +126,17 @@ function y() {
 }
 
 # Alias
-alias teams='teams-for-linux'
-# GlobalProtect, replacing the Azure VPN client. sudo is needed to create the tun
-# device, and -E so the SAML window inherits the Wayland session env -- drop either
-# and it fails, in different and unobvious ways. Reaches live and canary both.
-# --browser firefox sends SAML to a real browser instead of the embedded WebKit window.
 alias thon-vpn='sudo -E gpclient connect --browser firefox vpngw-hub02.thon.com'
 alias thon-vpn-down='sudo gpclient disconnect'
-# Nimtech WireGuard. Config in /etc/wireguard/wg0.conf (one per machine, from the
-# Nimtech portal). AllowedIPs is 0.0.0.0/0, so ALL traffic goes through it.
 alias nimtech-up='sudo wg-quick up wg0'
 alias nimtech-down='sudo wg-quick down wg0'
 alias mscd='cd /home/kjetilcf/Dropbox/Nimtech/thon/microservices'
 alias l5c='bluetoothctl connect 00:7F:1D:CC:2D:CE'
 alias l5d='bluetoothctl disconnect 00:7F:1D:CC:2D:CE'
+alias wonderboomcn='bluetoothctl connect 68:59:32:F3:51:B7'
+alias wonderboomdc='bluetoothctl disconnect 68:59:32:F3:51:B7'
+alias hfp='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE headset-head-unit'
+alias a2dp='pactl set-card-profile bluez_card.00_7F_1D_CC_2D_CE a2dp-sink'
 # PIM activation
 # Activates "Azure Kubernetes Service RBAC Cluster Admin". The eligibility sits on
 # the "Azure Kubernetes Services" scope, so one activation covers every cluster
@@ -165,5 +162,3 @@ pim-aks() {
     --body "$body" --query "properties.status" -o tsv
 }
 
-alias wonderboomcn='bluetoothctl connect 68:59:32:F3:51:B7'
-alias wonderboomdc='bluetoothctl disconnect 68:59:32:F3:51:B7'
